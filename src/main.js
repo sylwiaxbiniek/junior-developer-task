@@ -8,7 +8,7 @@ Vue.use(VueResource);
 
 import App from './App.vue'
 
-const Products = require('./views/Products.vue');
+import Products from './views/Products.vue';
 
 const routes = [
     {

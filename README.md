@@ -10,8 +10,6 @@ The API used in this project is a Node.js express API.
 # Run Client
     > npm run front:develop
     
-Navigation to http://localhost:8080 to view the site
-    
 # Start API
 
 To start the API open your command terminal to this location and enter
