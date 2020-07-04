@@ -12,7 +12,14 @@ const MOCK_PRODUCTS = [{
     "prize": 38.49
 }];
 
-describe('API GET', function () {
+const MOCK_PRODUCT = {
+    "id": 3,
+    "name": "Człowiek vs Komputer",
+    "url": "https://gynvael.coldwind.pl/?id=712",
+    "prize": 15.15
+};
+
+describe('API PUT', function () {
     var server;
     var mockedDatabase;
 
@@ -32,36 +39,36 @@ describe('API GET', function () {
     afterEach(function () {
         server.close();
     });
-
-    it('should return correct product`s list', function testSlash(done) {
+    
+    it('should return updated item', function testSlash(done) {
         request(server)
-            .get('/products')
+            .put('/products/0')
+            .send(MOCK_PRODUCT)
             .expect(200)
             .then(response => {
-                assert.deepEqual(response.body, MOCK_PRODUCTS);
-                done();
-            })
-    });
-
-    it('should return first item', function testSlash(done) {
-        request(server)
-            .get('/products/0')
-            .expect(200)
-            .then(response => {
-                assert.deepEqual(response.body, MOCK_PRODUCTS[0]);
+                assert.deepEqual(response.body, MOCK_PRODUCT);
                 done();
             })
     });
 
     it('should return NOT FOUND', function testSlash(done) {
         request(server)
-            .get('/products/1')
+            .put('/products/1')
+            .send(MOCK_PRODUCT)
             .expect(404, done)
     });
 
     it('should return BAD REQUEST', function testSlash(done) {
         request(server)
-            .get('/products/aaa')
+            .put('/products/aaa')
+            .send(MOCK_PRODUCT)
+            .expect(400, done)
+    });
+
+    it('should return BAD REQUEST', function testSlash(done) {
+        request(server)
+            .put('/products/0')
+            .send({ 'ala': 'ma kota' })
             .expect(400, done)
     });
 });

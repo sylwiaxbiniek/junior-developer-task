@@ -9,9 +9,9 @@ app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function(req: express.Request, res: express.Response, next: express.NextFunction) {
+app.use(function (req: express.Request, res: express.Response, next: express.NextFunction) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
@@ -20,8 +20,12 @@ app.use(function(req: express.Request, res: express.Response, next: express.Next
 });
 
 app.get('/products', ProductsController.getAllItems);
+app.get('/products/:id', ProductsController.validateId, ProductsController.getSingleItem);
+app.post('/products', ProductsController.validateProduct, ProductsController.createItem);
+app.put('/products/:id', ProductsController.validateId, ProductsController.validateProduct, ProductsController.modifyItem);
+app.delete('/products/:id', ProductsController.validateId, ProductsController.deleteItem);
 
-export const server = app.listen(app.get('port'), function() {
+export const server = app.listen(app.get('port'), function () {
     console.log('Server started: http://localhost:' + app.get('port') + '/');
 });
 
