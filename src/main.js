@@ -7,6 +7,7 @@ import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
 import App from './App.vue'
+import vuetify from './plugins/vuetify';
 
 import Products from './views/Products.vue';
 
@@ -19,4 +20,4 @@ const routes = [
 ];
 
 var router = new VueRouter({ routes: routes, mode: 'history' });
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+new Vue(Vue.util.extend({ router, vuetify }, App)).$mount('#app');
