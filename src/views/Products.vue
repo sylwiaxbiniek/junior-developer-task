@@ -1,13 +1,14 @@
 <template>
   <div id="all-items">
-    <v-row justify="left">
+    <v-row>
+      <v-col cols="1"></v-col>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-simple-table>
             <thead>
               <tr>
                 <td>
-                  <h1>Products</h1>
+                  <h1 class="font-weight-bold, display-2">Products</h1>
                 </td>
                 <td>
                   <v-btn fab depressed small dark color="blue" v-bind="attrs" v-on="on">
@@ -20,11 +21,14 @@
         </template>
         <v-card>
           <v-card-title>
-            <span class="headline">Product</span>
+            <span class="font-weight-bold, display-1">Product</span>
           </v-card-title>
           <v-card-text>
             <v-form @submit.prevent="saveItem">
               <v-container>
+                <div>
+                  <v-progress-linear indeterminate color="yellow darken-2"></v-progress-linear>
+                </div>
                 <v-row>
                   <v-col cols="3">
                     <v-text-field v-model="id" label="Id" required></v-text-field>
@@ -68,45 +72,53 @@
       </v-dialog>
     </v-row>
     <template>
-      <v-simple-table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="text-left">ID</th>
-            <th class="text-left">Name</th>
-            <th class="text-left">Url</th>
-            <th class="text-left">Prize</th>
-            <th class="text-left">Actions</th>
-            <th class="text-left"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in items" v-bind:key="index">
-            <th>{{ item.id }}</th>
-            <td>{{ item.name }}</td>
-            <td>{{ item.url }}</td>
-            <td>{{ item.prize }}zł</td>
-            <td>
-              <v-btn v-on:click="deleteItem(index)" class="ma-2" text icon color="blue">
-                <span class="material-icons">delete</span>
-              </v-btn>
-            </td>
-            <td>
-              <v-btn v-on:click="editProduct(index)" class="ma-2" text icon color="blue">
-                <span class="material-icons">create</span>
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </v-simple-table>
+      <v-container class="my-10">
+        <div>
+          <v-progress-linear indeterminate color="yellow darken-2"></v-progress-linear>
+        </div>
+        <v-simple-table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-left">ID</th>
+              <th class="text-left">Name</th>
+              <th class="text-left">Url</th>
+              <th class="text-left">Prize</th>
+              <th class="text-left">Actions</th>
+              <th class="text-left"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in items" v-bind:key="index">
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.url }}</td>
+              <td>{{ item.prize }}zł</td>
+              <td>
+                <v-btn v-on:click="deleteItem(index)" class="ma-2" text icon color="blue">
+                  <span class="material-icons">delete</span>
+                </v-btn>
+              </td>
+              <td>
+                <v-btn v-on:click="editProduct(index)" class="ma-2" text icon color="blue">
+                  <span class="material-icons">create</span>
+                </v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-container>
     </template>
   </div>
 </template>
 
 <style>
-body {
-  background: rgb(177, 54, 54);
-  color: #fff;
+
+td {
+  font-family: "Proza Libre", sans-serif;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
 }
+
 </style>
 
 <script>
