@@ -19,10 +19,10 @@ function handleError(err: Error, res: express.Response) {
 }
 
 function isIProduct(arg: any): arg is IProduct {
-    return arg && arg.id && typeof (arg.id) == 'number'
-        && arg.name && typeof (arg.name) == 'string'
-        && arg.url && typeof (arg.url) == 'string'
-        && arg.prize && typeof (arg.prize) == 'number';
+    return arg && arg.hasOwnProperty('id') && typeof (arg.id) == 'number'
+        && arg.hasOwnProperty('name') && typeof (arg.name) == 'string'
+        && arg.hasOwnProperty('url') && typeof (arg.url) == 'string'
+        && arg.hasOwnProperty('prize') && typeof (arg.prize) == 'number';
 }
 
 export class ProductsController {
@@ -30,6 +30,7 @@ export class ProductsController {
         let id = Number(req.params.id);
 
         if (isNaN(id)) {
+            console.log("dupa1");
             return res.status(400).json({ 'error': 'id not a number' });
         } else {
             next()
@@ -40,6 +41,8 @@ export class ProductsController {
         if (isIProduct(req.body)) {
             next()
         } else {
+            console.log("dupa2");
+
             return res.status(400).json({ 'error': 'not a product' });
         }
     }
