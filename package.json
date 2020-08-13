@@ -16,6 +16,7 @@
     "@types/mocha": "^7.0.2",
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
+    "material-design-icons-iconfont": "^5.0.1",
     "typescript": "^3.8.3",
     "vue": "^2.0.1",
     "vue-resource": "^1.5.1",
